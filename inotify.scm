@@ -1,3 +1,5 @@
+; linux Inotifiy wrapper
+
 (require-extension miscmacros)
 
 (foreign-declare "#include <sys/inotify.h>")

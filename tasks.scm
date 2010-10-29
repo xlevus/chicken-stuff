@@ -1,6 +1,9 @@
 (require-extension srfi-1)
 (require-extension mailbox)
 
+; Macro that wraps up a bunch of functions, a mailbox channel and a thread and a mainloop
+; With the intent to make a simple lock-free threading system driven by interprocess communication
+
 (define-syntax task
    (syntax-rules () 
      ((_ 'name ((var init) ...) . main_body) 
