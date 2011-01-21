@@ -54,8 +54,8 @@
         while (i < length) {
             struct inotify_event *event = (struct inotify_event *) &buffer[i];
             if (event->len) {
-                // foo_callback(event->wd, event->mask, event->cookie, event->len, event->name); // This works
-                callback(event->wd, event->mask, event->cookie, event->len, event->name); // This doesn't 
+                foo_callback(event->wd, event->mask, event->cookie, event->len, event->name); // This works
+                //callback(event->wd, event->mask, event->cookie, event->len, event->name); // This doesn't 
             }
             i += EVENT_SIZE + event->len;
         }
@@ -68,9 +68,9 @@
 
 ; Main
 (define fd (inotify_init))
-(define wd (inotify_add_watch fd "/home/xin/Projects/git/chicken-fs/test" IN_ALL_EVENTS))
+(define wd (inotify_add_watch fd "/home/xin/Projects/chicken-stuff/test" IN_ALL_EVENTS))
 
 
 (while #t
-    (inotify_read fd (lambda (wd mask cookie len name) (display name))))
+    (inotify_read fd foo_callback))
 
